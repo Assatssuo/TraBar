@@ -1,5 +1,9 @@
 package trabar.persistencia;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +18,30 @@ public class ClienteDAO implements Cadastro {
 	private List<Entrada> presentes;
 	private List<Saida> ausentes;
 	
-	public void Entrar(Cliente cliente) {
+	public void entrar(Cliente cliente) {
 		clientes.put(cliente.getCpf(), cliente);
-		presentes.add(new Entrada(cliente.getCpf()));
+		Entrada entrada = new Entrada(cliente.getCpf()); 
+		presentes.add(entrada);
+		
+		try(PrintWriter pw = new PrintWriter(new File ("entradas.csv"))){
+			pw.print(cliente.getCpf());
+			pw.print(";");
+			pw.print(cliente.getNome());
+			pw.print(";");
+			pw.print(cliente.getIdade());
+			pw.print(";");			
+			pw.print(cliente.getGenero());
+			pw.print(";");
+			pw.print(cliente.getStatus());
+			pw.print(";");
+			pw.print(entrada.getHorario());
+			pw.println(";");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
-	public void Sair(String cpf) {
+	public void sair(String cpf) {
 		for(Entrada entrada : presentes){
 			if(entrada.getCpf().equals(cpf)){
 				presentes.remove(entrada);
@@ -26,7 +49,25 @@ public class ClienteDAO implements Cadastro {
 				//throw exception
 			}
 		}
-		ausentes.add(new Saida(cpf));
+		Saida saida =  new Saida(cpf);
+		ausentes.add(saida);
+		Cliente cliente = clientes.get(cpf);
+		try(PrintWriter pw = new PrintWriter(new File ("saidas.csv"))){
+			pw.print(cliente.getCpf());
+			pw.print(";");
+			pw.print(cliente.getNome());
+			pw.print(";");
+			pw.print(cliente.getIdade());
+			pw.print(";");
+			pw.print(cliente.getGenero());
+			pw.print(";");
+			pw.print(cliente.getStatus());
+			pw.print(";");
+			pw.print(saida.getHorario());
+			pw.println(";");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	public Cliente getCliente(String cpf) {
 		for(Entrada entrada : presentes){
@@ -36,7 +77,7 @@ public class ClienteDAO implements Cadastro {
 	}
 	
 	public List<Cliente> getLista() {
-		List<Cliente> resultado = null;
+		List<Cliente> resultado = new ArrayList();
 		for(Entrada entrada : presentes){
 			resultado.add(clientes.get(entrada.getCpf()));
 		}
@@ -51,4 +92,5 @@ public class ClienteDAO implements Cadastro {
 		}
 		return resultado;	
 	}
+	
 }

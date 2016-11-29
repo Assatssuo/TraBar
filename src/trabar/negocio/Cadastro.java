@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface Cadastro {
 	
-	public void Entrar(Cliente cliente);
+	public void entrar(Cliente cliente);
 	
-	public void Sair(String cpf);
+	public void sair(String cpf);
 	
 	public Cliente getCliente(String cpf);
 	

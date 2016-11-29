@@ -9,12 +9,18 @@ public class Cliente {
 	private int idade;
 	
 	// F or M
-	private char genero;
+	private Genero genero;
+	public enum Genero{
+		F,M;
+	}
 	
-	//N = None, S = Silver, G = Gold, P = Platinum 
-	private char statusVIP;
+	private StatusVIP statusVIP;
+	public enum StatusVIP{
+		None, Silver, Gold, Platinum;
+		
+	}
 	
-	public Cliente(String nome, String cpf, int idade, char genero, char status){
+	public Cliente(String nome, String cpf, int idade, Genero genero, StatusVIP status){
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
@@ -22,15 +28,23 @@ public class Cliente {
 		this.statusVIP = status;
 	}
 	
+	public String getNome(){
+		return nome;
+	}
+	
+	public int getIdade(){
+		return idade;
+	}
+	
 	public String getCpf(){
 		return cpf;
 	}
 	
-	public char getGenero(){
+	public Genero getGenero(){
 		return genero;
 	}
 	
-	public char getStatus(){
+	public StatusVIP getStatus(){
 		return statusVIP;
 	}
 	

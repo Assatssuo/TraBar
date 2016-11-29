@@ -14,4 +14,8 @@ public class Entrada {
 	public String getCpf(){
 		return cpf;
 	}
+	
+	public Date getHorario() {
+		return horario;
+	}
 }
