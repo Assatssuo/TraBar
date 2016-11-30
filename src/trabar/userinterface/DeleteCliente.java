@@ -55,12 +55,11 @@ public class DeleteCliente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					CadastroController.ExcluirCliente(txtfCpf.getText());
+					setVisible(false);
+					dispose();
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(getParent(), e1);
-				}
-				
-				setVisible(false);
-				dispose();
+				}				
 			}
 		});
 		

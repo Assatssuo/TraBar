@@ -81,11 +81,11 @@ public class CadastroCliente extends JFrame {
 														txtfIdade.getText(),
 														Cliente.Genero.valueOf(cmbGenero.getSelectedItem().toString()),
 														Cliente.StatusVIP.valueOf(cmbStatusVIP.getSelectedItem().toString()));
+					setVisible(false);
+					dispose();
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(getParent(), e);
-				}
-				setVisible(false);
-				dispose();
+				}				
 			}
 		});
 		
