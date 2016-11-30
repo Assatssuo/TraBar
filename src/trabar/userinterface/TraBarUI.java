@@ -38,7 +38,7 @@ public class TraBarUI extends JFrame {
 	 */
 	public TraBarUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 336, 226);
+		setBounds(100, 100, 366, 248);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -66,26 +66,40 @@ public class TraBarUI extends JFrame {
 				relatorio.setVisible(true);
 			}
 		});
+		
+		JButton btnCheckCliente = new JButton("Check Cliente");
+		btnCheckCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CheckCliente check = new CheckCliente();
+				check.setVisible(true);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(btnAddCliente)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnDeleteCliente)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnRelatorio)
-					.addContainerGap(15, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(42)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnAddCliente, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnCheckCliente))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnRelatorio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnDeleteCliente))
+					.addGap(36))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(78)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAddCliente)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(65, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(btnDeleteCliente)
-						.addComponent(btnRelatorio))
-					.addContainerGap(76, Short.MAX_VALUE))
+						.addComponent(btnAddCliente))
+					.addGap(26)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnRelatorio)
+						.addComponent(btnCheckCliente))
+					.addGap(62))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

@@ -8,17 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class DeleteCliente extends JFrame {
+public class CheckCliente extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtfCpf;
@@ -30,7 +28,7 @@ public class DeleteCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DeleteCliente frame = new DeleteCliente();
+					CheckCliente frame = new CheckCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,56 +40,53 @@ public class DeleteCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeleteCliente() {
-		setTitle("Deletar Cliente");
+	public CheckCliente() {
+		setTitle("Checkar Cliente");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 353, 266);
+		setBounds(100, 100, 431, 271);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnDeletar = new JButton("Deletar");
-		btnDeletar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					CadastroController.ExcluirCliente(txtfCpf.getText());
-					setVisible(false);
-					dispose();
-				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(getParent(), e1);
-				}				
-			}
-		});
-		
 		txtfCpf = new JTextField();
 		txtfCpf.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Digite o CPF da pessoa que sair\u00E1 do bar:");
+		JLabel lblDigiteOCpf = new JLabel("Digite o CPF da pessoa que deseja checkar se est\u00E1 no bar:");
+		
+		JButton btnCheckar = new JButton("Checkar");
+		btnCheckar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(CadastroController.checkarCliente(txtfCpf.getText())){
+					JOptionPane.showMessageDialog(getParent(), "Cliente está no bar!!");
+				}else{
+					JOptionPane.showMessageDialog(getParent(), "Cliente não está no bar :/");
+				}
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(55)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGap(29)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(txtfCpf, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtfCpf)
 							.addGap(18)
-							.addComponent(btnDeletar))
-						.addComponent(lblNewLabel))
-					.addContainerGap(62, Short.MAX_VALUE))
+							.addComponent(btnCheckar))
+						.addComponent(lblDigiteOCpf))
+					.addContainerGap(36, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(77)
-					.addComponent(lblNewLabel)
+					.addGap(84)
+					.addComponent(lblDigiteOCpf)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(txtfCpf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDeletar))
-					.addContainerGap(92, Short.MAX_VALUE))
+						.addComponent(btnCheckar))
+					.addContainerGap(90, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

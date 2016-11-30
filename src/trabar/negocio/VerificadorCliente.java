@@ -3,23 +3,19 @@ package trabar.negocio;
 import trabar.persistencia.ClienteDAO;
 
 public class VerificadorCliente {
-	
-	private static Cadastro cadastro = new ClienteDAO();
 
-	public static boolean verificaDados(String nome, String cpf, String idade){		
-		return (isNomeValid(nome)&&isCpfValid(cpf)&&isIdadeValid(idade));
+	public static boolean verificaDados(String nome, String cpf, String idade, Cadastro cadastro){		
+		return (isNomeValid(nome)&&isCpfValid(cpf,cadastro)&&isIdadeValid(idade));
 	}	
 	
 	public static boolean isNomeValid(String nome){
 		return nome.matches("[a-zA-Z]+\\.?");
 	}
 	
-	public static boolean isCpfValid(String cpf){
+	public static boolean isCpfValid(String cpf, Cadastro cadastro){
 		String regex = "\\d+";
-		if(cpf.matches(regex)&&cpf.length()==11&&(cadastro.getCliente(cpf)) == null)
+		if(cpf.matches(regex)&&cpf.length()==11&&!verificaCpfPresentes(cpf,cadastro))
 			return true;
-		
-		System.out.println(cadastro.getCliente(cpf));
 		return false;
 	}
 	public static boolean isIdadeValid(String idade){
@@ -34,7 +30,7 @@ public class VerificadorCliente {
 		return false;
 	}
 	
-	public static boolean verificaCpfPresentes(String cpf){
+	public static boolean verificaCpfPresentes(String cpf, Cadastro cadastro){
 		for(Entrada cliente : cadastro.getPresentes()){
 			if(cliente.getCpf().equals(cpf)){
 				return true;

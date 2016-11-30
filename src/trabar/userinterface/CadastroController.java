@@ -15,7 +15,7 @@ public class CadastroController {
 	private static Cadastro cadastro = new ClienteDAO();
 	
 	public static void AdicionarCliente(String nome, String cpf, String idade, Genero genero, StatusVIP statusVIP) throws IOException{
-		if(VerificadorCliente.verificaDados(nome,cpf,idade)){
+		if(VerificadorCliente.verificaDados(nome,cpf,idade,cadastro)){
 			cadastro.entrar(new Cliente(nome,cpf,Integer.parseInt(idade),genero,statusVIP));
 		}else{
 			throw new IOException("Dados inválidos.");
@@ -23,7 +23,7 @@ public class CadastroController {
 	}
 	
 	public static void ExcluirCliente(String cpf) throws IOException{
-		if(VerificadorCliente.verificaCpfPresentes(cpf))
+		if(VerificadorCliente.verificaCpfPresentes(cpf,cadastro))
 			cadastro.sair(cpf);
 		else{
 			throw new IOException("O cliente, de cpf "+cpf+", não está no bar.");
@@ -31,8 +31,12 @@ public class CadastroController {
 	}
 
 	public static RelatorioDados CalculaRelatorio() {
-		RelatorioDados relatorio = new RelatorioDados();
+		RelatorioDados relatorio = new RelatorioDados(cadastro);
 		return relatorio;
+	}
+
+	public static boolean checkarCliente(String cpf) {
+		return VerificadorCliente.verificaCpfPresentes(cpf, cadastro);
 	}
 
 }

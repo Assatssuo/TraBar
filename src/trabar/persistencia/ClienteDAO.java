@@ -18,9 +18,9 @@ import trabar.negocio.Entrada;
 import trabar.negocio.Saida;
 
 public class ClienteDAO implements Cadastro {
-	private static Map<String,Cliente> clientes;
-	private static List<Entrada> presentes;
-	private static List<Saida> ausentes;
+	private Map<String,Cliente> clientes;
+	private List<Entrada> presentes;
+	private List<Saida> ausentes;
 	
 	public ClienteDAO(){
 		clientes = new LinkedHashMap<String,Cliente>();

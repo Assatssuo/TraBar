@@ -42,7 +42,7 @@ public class Relatorio extends JFrame {
 	 * Create the frame.
 	 */
 	public Relatorio() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 304, 235);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,16 +89,13 @@ public class Relatorio extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnFechar)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(84)
-								.addComponent(lblQuantidade))
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblGenero)
-								.addComponent(lblPercentualH)
-								.addComponent(lblPercentualM))))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(84)
+							.addComponent(lblQuantidade))
+						.addComponent(lblGenero)
+						.addComponent(lblPercentualH)
+						.addComponent(lblPercentualM))
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblStatusNone)
@@ -107,6 +104,10 @@ public class Relatorio extends JFrame {
 						.addComponent(lblNewLabel)
 						.addComponent(lblStatusGold))
 					.addGap(222))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(101)
+					.addComponent(btnFechar)
+					.addContainerGap(317, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -135,7 +136,7 @@ public class Relatorio extends JFrame {
 					.addComponent(lblStatusNone)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnFechar)
-					.addContainerGap(37, Short.MAX_VALUE))
+					.addContainerGap(16, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

@@ -52,8 +52,8 @@ public class CadastroCliente extends JFrame {
 	 */
 	public CadastroCliente() {
 		setTitle("Adcionar cliente");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 342, 269);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 400, 311);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -101,8 +101,8 @@ public class CadastroCliente extends JFrame {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(26)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(60, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel)
 						.addComponent(lblNewLabel_1)
@@ -117,12 +117,12 @@ public class CadastroCliente extends JFrame {
 						.addComponent(txtfNome, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
 						.addComponent(txtfCpf)
 						.addComponent(txtfIdade, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(100, Short.MAX_VALUE))
+					.addGap(47))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
+					.addGap(35)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(txtfNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel))
@@ -144,7 +144,7 @@ public class CadastroCliente extends JFrame {
 						.addComponent(lblNewLabel_4))
 					.addGap(42)
 					.addComponent(btnSalvar)
-					.addContainerGap(51, Short.MAX_VALUE))
+					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
