@@ -16,7 +16,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class CadastroCliente extends JFrame {
@@ -72,7 +75,17 @@ public class CadastroCliente extends JFrame {
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CadastroController.AdicionarCliente(txtfNome.getText(),txtfCpf.getText(),txtfIdade.getText());
+				try {
+					CadastroController.AdicionarCliente(txtfNome.getText(),
+														txtfCpf.getText(),
+														txtfIdade.getText(),
+														Cliente.Genero.valueOf(cmbGenero.getSelectedItem().toString()),
+														Cliente.StatusVIP.valueOf(cmbStatusVIP.getSelectedItem().toString()));
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(getParent(), e);
+				}
+				setVisible(false);
+				dispose();
 			}
 		});
 		

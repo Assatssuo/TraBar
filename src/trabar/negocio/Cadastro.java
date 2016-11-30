@@ -13,4 +13,8 @@ public interface Cadastro {
 	public List<Cliente> getLista();
 	
 	public boolean isPresente(String cpf);
+	
+	public List<Entrada> getPresentes();
+	
+	public List<Saida> getAusentes();
 }

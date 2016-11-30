@@ -2,7 +2,11 @@ package trabar.persistencia;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,16 +18,22 @@ import trabar.negocio.Entrada;
 import trabar.negocio.Saida;
 
 public class ClienteDAO implements Cadastro {
-	private Map<String,Cliente> clientes = new LinkedHashMap<String,Cliente>();
-	private List<Entrada> presentes;
-	private List<Saida> ausentes;
+	private static Map<String,Cliente> clientes;
+	private static List<Entrada> presentes;
+	private static List<Saida> ausentes;
+	
+	public ClienteDAO(){
+		clientes = new LinkedHashMap<String,Cliente>();
+		presentes = new ArrayList();
+		ausentes = new ArrayList();
+	}
 	
 	public void entrar(Cliente cliente) {
 		clientes.put(cliente.getCpf(), cliente);
 		Entrada entrada = new Entrada(cliente.getCpf()); 
 		presentes.add(entrada);
 		
-		try(PrintWriter pw = new PrintWriter(new File ("entradas.csv"))){
+		try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File ("entradas.csv"), true))){
 			pw.print(cliente.getCpf());
 			pw.print(";");
 			pw.print(cliente.getNome());
@@ -42,17 +52,19 @@ public class ClienteDAO implements Cadastro {
 		
 	}
 	public void sair(String cpf) {
+		Entrada aux = null;
 		for(Entrada entrada : presentes){
 			if(entrada.getCpf().equals(cpf)){
-				presentes.remove(entrada);
+				aux = entrada;
 			}else{
 				//throw exception
 			}
 		}
+		presentes.remove(aux);
 		Saida saida =  new Saida(cpf);
 		ausentes.add(saida);
 		Cliente cliente = clientes.get(cpf);
-		try(PrintWriter pw = new PrintWriter(new File ("saidas.csv"))){
+		try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File ("saida.csv"), true))){
 			pw.print(cliente.getCpf());
 			pw.print(";");
 			pw.print(cliente.getNome());
@@ -92,5 +104,11 @@ public class ClienteDAO implements Cadastro {
 		}
 		return resultado;	
 	}
+	public List<Entrada> getPresentes(){
+		return presentes;
+	}
 	
+	public List<Saida> getAusentes() {
+		return ausentes;
+	}
 }
