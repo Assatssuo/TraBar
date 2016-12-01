@@ -1,6 +1,7 @@
 package trabar.userinterface;
 
 import java.io.IOException;
+import java.util.List;
 
 import trabar.negocio.Cadastro;
 import trabar.negocio.Cliente;
@@ -37,6 +38,10 @@ public class CadastroController {
 
 	public static boolean checkarCliente(String cpf) {
 		return VerificadorCliente.verificaCpfPresentes(cpf, cadastro);
+	}
+	
+	public static List<Cliente> listaClientesPresentes(){
+		return cadastro.getLista();
 	}
 
 }
